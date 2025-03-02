@@ -9,8 +9,8 @@ on:
       - focal
       
 jobs:
-  lint:
-    runs-on: ubuntu-latest
+  Build:
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
