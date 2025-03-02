@@ -3,10 +3,10 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - main
+      - focal
   pull_request:
     branches:
-      - main
+      - focal
 
 env:
   DOCKER_DRIVER: overlay2
