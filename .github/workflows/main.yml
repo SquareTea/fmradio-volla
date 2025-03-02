@@ -36,7 +36,7 @@ jobs:
       - name: Run black
         uses: docker://cytopia/black:latest
         with:
-          entrypoint: ['/bin/ash', '-c']
+          entrypoint: '/bin/ash -c'
           args: |
             black --diff .
             black --check -v .
