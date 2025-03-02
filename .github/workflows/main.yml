@@ -34,7 +34,7 @@ jobs:
 
       - name: Run black
         run: |
-          docker run --rm -v $(pwd):/mnt cytopia/black:latest /bin/ash -c "black --diff . && black --check -v ."
+          docker run --rm -v $(pwd):/mnt cytopia/black:latest /bin/ash -c "black --diff /mnt && black --check -v /mnt"
 
       - name: Run shellcheck
         run: |
