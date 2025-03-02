@@ -33,12 +33,8 @@ jobs:
           docker run --rm -v $(pwd):/mnt cytopia/yamllint:latest -s .
 
       - name: Run black
-        uses: docker://cytopia/black:latest
-        with:
-          entrypoint: '/bin/ash -c'
-          args: |
-            black --diff .
-            black --check -v .
+        run: |
+          docker run --rm -v $(pwd):/mnt cytopia/black:latest /bin/ash -c "black --diff . && black --check -v ."
 
       - name: Run shellcheck
         run: |
