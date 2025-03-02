@@ -20,7 +20,7 @@ jobs:
           sudo apt install docker.io adb git python3 python3-pip python3-setuptools
           pip3 install --user clickable-ut
           export PATH="$PATH:$HOME/.local/bin"
-          clickable --arch=arm64
+          clickable build --arch=arm64
                     
       - name: Upload Artifacts
         uses: actions/upload-artifact@master
