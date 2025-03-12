@@ -96,14 +96,14 @@ bool MediatekRadio::isRadioRunning() {
 void MediatekRadio::startVolumeUpdater() {
 
 	system("touch ~/.radioRunning");
-	system("while ( test -f ~/.radioRunning) do $(pactl set-source-volume source.droid $(printf \"%.*f\\n\" 0 $(echo print $(dbus-send --session --type=method_call --print-reply --dest=org.ayatana.indicator.sound /org/ayatana/indicator/sound org.gtk.Actions.DescribeAll | grep -A5 \"string \\\"volume\\\"\" | grep double | cut -b 49-52)*65536 | perl))); done &");
+	system("while ( test -f ~/.radioRunning) do $(pactl set-source-volume source.primary_input $(printf \"%.*f\\n\" 0 $(echo print $(dbus-send --session --type=method_call --print-reply --dest=org.ayatana.indicator.sound /org/ayatana/indicator/sound org.gtk.Actions.DescribeAll | grep -A5 \"string \\\"volume\\\"\" | grep double | cut -b 49-52)*65536 | perl))); done &");
 
 }
 
 void MediatekRadio::stopVolumeUpdater() {
 
 	system("rm ~/.radioRunning");
-	system("pactl set-source-volume source.droid 65536"); // 100%
+	system("pactl set-source-volume source.primary_input 65536"); // 100%
 
 }
 
@@ -154,9 +154,9 @@ QByteArray MediatekRadio::stopRadio() {
 	ret = system("pactl unload-module module-loopback");
 
 	if(isHeadset) {
-		ret = system("pacmd set-source-port source.droid input-wired_headset && pacmd set-sink-port sink.primary_output output-wired_headset");
+		ret = system("pacmd set-source-port source.primary_input input-wired_headset && pacmd set-sink-port sink.primary_output output-wired_headset");
 	} else {
-		ret = system("pacmd set-source-port source.droid input-builtin_mic && pacmd set-sink-port sink.primary_output output-wired_headphone");
+		ret = system("pacmd set-source-port source.primary_input input-builtin_mic && pacmd set-sink-port sink.primary_output output-wired_headphone");
 	}
 
 	stopVolumeUpdater();
