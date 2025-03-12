@@ -81,8 +81,8 @@ void MediatekRadio::preparePulseAudio() {
 
 	int ret;
 
-	ret = system("pacmd set-source-port source.droid input-fm_tuner");
-	ret = system("pactl load-module module-loopback source=source.droid sink=sink.primary_output");
+	ret = system("pacmd set-source-port source.primary_input input-fm_tuner");
+	ret = system("pactl load-module module-loopback source=source.primary_input sink=sink.primary_output");
 
 }
 
